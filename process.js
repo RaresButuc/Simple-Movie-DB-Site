@@ -66,13 +66,9 @@ const task2 = (data) => {
 	return data.movies
 }
 
-function dataRead(err, data) {
-	if (err) {
-		console.error(err);
-		return;
-	}
-	const movie = JSON.parse(data);
-	//console.log(task1(movie.movies))
+
+	const read = fs.readFileSync('data.json');
+	const movie = JSON.parse(read);
 	movieDB.professionals = task1(movie.movies)
 	movieDB.movies = movie.movies
 
@@ -81,8 +77,8 @@ function dataRead(err, data) {
 	movieDB.movies = task2(movieDB)
 	//console.log(task2(movie.movies))
 	console.log(movieDB.movies[2])
-}
-fs.readFile('data.json', 'utf-8', dataRead);
+	
+
 
 
 //write your code brefore this line
