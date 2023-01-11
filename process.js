@@ -73,8 +73,8 @@ const task2 = (data) => {
 	movieDB.movies = movie.movies
 
 //apelare exercitiul 2	
-	//console.log(task2(movieDB))
-	//movieDB.movies = task2(movieDB)
+	console.log(task2(movieDB))
+	movieDB.movies = task2(movieDB)
 	//console.log(task2(movie.movies))
 	//console.log(movieDB.movies[2])
 	
