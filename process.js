@@ -8,6 +8,7 @@ const movieDB = {
 
 //write you code after this line
 
+
 const task1 = (data) => {
 	let persons = [];
 	let uniqPersons;
@@ -19,7 +20,6 @@ const task1 = (data) => {
 	persons = persons.join(",").split(",")
 	uniqPersons = [...new Set(persons)]
 	let arr = Array.from({ length: uniqPersons.length }, () => ({ id: 0, name: "", roles: [] }))
-	let count = 0;
 	for (let i = 0; i < arr.length; i++) {
 		for (let j = 0; j < uniqPersons.length; j++) {
 			arr[i].name = uniqPersons[i]
@@ -66,17 +66,38 @@ const task2 = (data) => {
 	return data.movies
 }
 
+const task6 = (data) =>{
+	let genres = [];
+	for (let key of data) {
+		genres.push(key.genres)
+	}
+	genres = genres.join(",").split(",")
+	genres =[...new Set(genres)]
+	let arr = Array.from({ length: genres.length }, () => ({ id: 0, name: ""}))
+	for (let i = 0; i < arr.length; i++) {
+		for (let j = 0; j < genres.length; j++) {
+			arr[i].name = genres[i]
+		}
+	}
+	arr.forEach(element => {
+		element.id = 1 + arr.indexOf(element)
+	});
+	return arr
+}
 
 	const read = fs.readFileSync('data.json');
 	const movie = JSON.parse(read);
 	movieDB.professionals = task1(movie.movies)
 	movieDB.movies = movie.movies
+	movieDB.genres = task6(movie.movies)
+
 
 //apelare exercitiul 2	
-	console.log(task2(movieDB))
-	movieDB.movies = task2(movieDB)
+console.log(movieDB.genres)
+movieDB.movies = task2(movieDB)
+
 	//console.log(task2(movie.movies))
-	//console.log(movieDB.movies[2])
+	
 	
 
 
