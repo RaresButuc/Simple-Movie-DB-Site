@@ -4,8 +4,14 @@ console.log(data)
 const divElement = function (content) {
   return `<div>${content}</div>`;
 }
+const h1Element = function (content) {
+  return `<h1>${content}</h1`;
+}
 const h2Element = function (content) {
   return `<h2>${content}</h2>`;
+}
+const h3Element = function (content) {
+  return `<h3>${content}</h3>`;
 }
 const h4Element = function (content) {
   return `<h4>${content}</h4>`;
@@ -64,13 +70,13 @@ const loadEvent = function () {
 
     ///Actors page
   } else if (page === "actors") {
-    document.getElementById("root").insertAdjacentHTML("beforeend", h2Element("Actors:"))
+    document.getElementById("root").insertAdjacentHTML("beforeend", h1Element("Actors:"))
     data.professionals.forEach(element => {
       element.roles.forEach(item => {
         if (item === "actors") {
-          document.getElementById("root").insertAdjacentHTML("beforeend", h4Element("Actor"))
+          document.getElementById("root").insertAdjacentHTML("beforeend", h2Element("Actor"))
           document.getElementById("root").insertAdjacentHTML("beforeend", divElement(element.name))
-          document.getElementById("root").insertAdjacentHTML("beforeend", h5Element("Movies acted in:"))
+          document.getElementById("root").insertAdjacentHTML("beforeend", h3Element("Movies acted in:"))
         }
       });
       data.movies.forEach(movie => {
@@ -84,13 +90,13 @@ const loadEvent = function () {
 
     //Directors page
   } else if (page === "directors") {
-    document.getElementById("root").insertAdjacentHTML("beforeend", h2Element("Directors:"))
+    document.getElementById("root").insertAdjacentHTML("beforeend", h1Element("Directors:"))
     data.professionals.forEach(element => {
       element.roles.forEach(item => {
         if (item === "directors") {
-          document.getElementById("root").insertAdjacentHTML("beforeend", h4Element("Director"))
+          document.getElementById("root").insertAdjacentHTML("beforeend", h2Element("Director"))
           document.getElementById("root").insertAdjacentHTML("beforeend", divElement(element.name))
-          document.getElementById("root").insertAdjacentHTML("beforeend", h5Element("Movies directed:"))
+          document.getElementById("root").insertAdjacentHTML("beforeend", h3Element("Movies directed:"))
         }
       });
       data.movies.forEach(movie => {
@@ -104,13 +110,13 @@ const loadEvent = function () {
 
     //Writers page
   } else if (page === "writers") {
-    document.getElementById("root").insertAdjacentHTML("beforeend", h2Element("Writers:"))
+    document.getElementById("root").insertAdjacentHTML("beforeend", h1Element("Writers:"))
     data.professionals.forEach(element => {
       element.roles.forEach(item => {
         if (item === "writers") {
-          document.getElementById("root").insertAdjacentHTML("beforeend", h4Element("Writer"))
+          document.getElementById("root").insertAdjacentHTML("beforeend", h2Element("Writer"))
           document.getElementById("root").insertAdjacentHTML("beforeend", divElement(element.name))
-          document.getElementById("root").insertAdjacentHTML("beforeend", h5Element("Movies written:"))
+          document.getElementById("root").insertAdjacentHTML("beforeend", h3Element("Movies written:"))
         }
       });
 
@@ -122,9 +128,50 @@ const loadEvent = function () {
         });
       });
     });
+//Genres page
+  } else if (page === "genres") {
+    document.getElementById("root").insertAdjacentHTML("beforeend", h1Element("Genres:"))
+    data.genres.forEach(dataGenre => {
+      document.getElementById("root").insertAdjacentHTML("beforeend", h2Element(`Genre: ${dataGenre.name.toUpperCase()}`))
+       data.movies.forEach(element => {
+        element.genres.forEach(movieGenre => {
+                if (movieGenre === dataGenre.name){
+                  document.getElementById("root").insertAdjacentHTML("beforeend", h3Element(`Movie Name:   ${element.title}`))
+      document.getElementById("root").insertAdjacentHTML("beforeend", divElement(`<strong>Year:</strong> ${element.year}`))
+      document.getElementById("root").insertAdjacentHTML("beforeend", divElement(`<strong>Runtime:</strong> ${element.runtime}`))
+      document.getElementById("root").insertAdjacentHTML("beforeend", divElement(`<strong>Genres:</strong> ${element.genres}`))
+      document.getElementById("root").insertAdjacentHTML("beforeend", divElement(`<strong>Release date:</strong> ${element["release-date"]}`))
+      // Replace writers id with their names
+      document.getElementById("root").insertAdjacentHTML("beforeend", divElement(`<strong>Writers:</strong>`))
+      element.writers.forEach(id => {
+        data.professionals.forEach(writer => {
+          if (id === writer.id)
+            document.getElementById("root").insertAdjacentHTML("beforeend", divElement(writer.name))
+        });
+      });
+      //Replace actors id with their names
+      document.getElementById("root").insertAdjacentHTML("beforeend", divElement(`<strong>Actors:</strong>`))
+      element.actors.forEach(id => {
+        data.professionals.forEach(actor => {
+          if (id === actor.id)
+            document.getElementById("root").insertAdjacentHTML("beforeend", divElement(actor.name))
+        });
+      });
+      document.getElementById("root").insertAdjacentHTML("beforeend", divElement(`<strong>Storyline:</strong> ${element.storyline || element.description}`))
+      //Replace directors id with their names
+      document.getElementById("root").insertAdjacentHTML("beforeend", divElement(`<strong>Directors:</strong>`))
+      element.directors.forEach(id => {
+        data.professionals.forEach(director => {
+          if (id === director.id)
+            document.getElementById("root").insertAdjacentHTML("beforeend", divElement(director.name))
+        });
+      });
+                }
+        // console.log(movie)
+        });
+      });
+     });
   }
-
-
 
   // const getMovoies = (myData) => {
   //  let actorsList = [];
